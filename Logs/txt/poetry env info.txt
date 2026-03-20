@@ -1,0 +1,16 @@
+PS C:\Users\vinic\desktop\faculdade\unb\eps> poetry env info
+
+Virtualenv
+Python:         3.12.0
+Implementation: CPython
+Path:           C:\Users\vinic\desktop\faculdade\unb\eps\.venv
+Executable:     C:\Users\vinic\desktop\faculdade\unb\eps\.venv\Scripts\python.exe
+Valid:          True
+
+Base
+Platform:   win32
+OS:         nt
+Python:     3.12.0
+Path:       C:\Users\vinic\AppData\Local\Programs\Python\Python312
+Executable: C:\Users\vinic\AppData\Local\Programs\Python\Python312\python.exe
+PS C:\Users\vinic\desktop\faculdade\unb\eps>

@@ -1,0 +1,3 @@
+PS C:\Users\vinic\desktop\faculdade\unb\eps> poetry run ruff check .
+All checks passed!
+PS C:\Users\vinic\desktop\faculdade\unb\eps> 
