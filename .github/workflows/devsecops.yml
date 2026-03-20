@@ -1,0 +1,44 @@
+name: DevSecOps Security Gate
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  security-and-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar o Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Configurar e Instalar Dependências
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry install
+
+      - name: Secret Scanning (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Linter e Formatter (Ruff)
+        run: poetry run ruff check .
+
+      - name: Auditoria Estática / SAST (Bandit)
+        run: poetry run bandit -c pyproject.toml -r .
+
+      - name: Scanner de Vulnerabilidades / SCA (Safety)
+        run: poetry run safety check
