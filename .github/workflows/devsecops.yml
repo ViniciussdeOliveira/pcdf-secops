@@ -27,7 +27,7 @@ jobs:
       - name: Configurar e Instalar Dependências
         run: |
           poetry config virtualenvs.in-project true
-          poetry install
+          poetry install --no-root
 
       - name: Secret Scanning (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
