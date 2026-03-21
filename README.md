@@ -1,61 +1,36 @@
-# Relatório de Prontidão Técnica: Onboarding SecOps & Soberania Técnica
+# Relatório de Prontidão Técnica: Onboarding SecOps
 
-**Engenheiro:** Vinicius de Oliveira Santos
+**Disciplina:** Engenharia de Produto de Software (FGA0316) - 2026.1
+**Aluno:** Vinícius de Oliveira Santos | **Matrícula:** 202017263
 
-**Data:** 20/03/2026
+## 1. Configuração do Ambiente (Zero Trust & Isolamento)
+Conforme as diretrizes de Soberania Técnica, as seguintes configurações foram aplicadas:
+- [ x ] **Python 3.12:** Instalado e verificado.
+- [ x ] **Poetry:** Configurado para criar `.venv` dentro do projeto (`virtualenvs.in-project true`).
+- [ x ] **Determinismo:** Arquivos `pyproject.toml` e `poetry.lock` gerados com sucesso.
 
-Este relatório consolida a execução da Fase 1 do onboarding, atestando o estabelecimento da infraestrutura base individual e da esteira de segurança (Security Gate) em conformidade com o Domínio 8 do CISSP.
+![envInfo](./Logs/img/envInfo_log.png)
 
-## Evidência de Ambiente (Isolamento e Determinismo)
-O ambiente foi configurado garantindo o isolamento via Poetry (`virtualenvs.in-project true`) e o uso da versão estável e obrigatória do Python.
+## 2. Logs de Auditoria e Qualidade (Security Gate)
+Abaixo constam os resumos das execuções dos comandos de segurança:
 
-**Log de comprovação (`poetry env info`):**
-```text
-Virtualenv
-Python:         3.12.0
-Implementation: CPython
-Path:           C:\Users\vinic\desktop\faculdade\unb\eps\.venv
-Executable:     C:\Users\vinic\desktop\faculdade\unb\eps\.venv\Scripts\python.exe
-Valid:          True
+### 2.1. Auditoria Estática (Bandit)
+![bandit](./Logs/img/bandit_log.png)
 
-Base
-Platform:   win32
-OS:         nt
-Python:     3.12.0
-````
+### 2.2. Verificação de Dependências (Safety)
+![safety](./Logs/img/safety_log.png)
 
-## Evidência de Segurança (Auditoria Estática)
+### 2.3. Qualidade e Conformidade (Ruff)
+![ruff](./Logs/img/ruff_log.png)
 
-A análise estática de segurança (SAST) foi executada localmente utilizando o Bandit, não identificando nenhuma vulnerabilidade lógica no código inicial, atendendo ao critério de zero issues.
-
-**Log de comprovação (`poetry run bandit -c pyproject.toml -r .`):**
-
-```text
-[main]  INFO    running on Python 3.12.0
-Run started:2026-03-20 15:02:39.767309+00:00
-
-Test results:
-        No issues identified.
-Code scanned:
-        Total lines of code: 0
-        Total lines skipped (#nosec): 0
-
-Run metrics:
-        Total issues (by severity):
-                Undefined: 0
-                Low: 0
-                Medium: 0
-                High: 0
-```
-
-*(Nota: Os testes complementares de Linter com Ruff e SCA com Safety também foram executados e retornaram sucesso, garantindo a ausência de CVEs conhecidas. Para verificá-los, consultar a pasta Log)*
-
-## Evidência de CI (Esteira DevSecOps)
-
-A esteira automatizada no GitHub Actions foi configurada e executada com sucesso, validando a integridade da aplicação a cada novo push.
-
+## 3. Evidência de Integração Contínua (CI)
+O pipeline automatizado foi executado com sucesso no GitHub Actions:
 [![DevSecOps Security Gate](https://github.com/ViniciussdeOliveira/pcdf-secops/actions/workflows/devsecops.yml/badge.svg?branch=main)](https://github.com/ViniciussdeOliveira/pcdf-secops/actions/workflows/devsecops.yml)
 
-## Declaração de Prontidão
+- **Link da Action de Sucesso:** [Github Actions](https://github.com/ViniciussdeOliveira/pcdf-secops/actions)
 
-Declaro que a fundação de DevSecOps e o setup mandatório localhost estão concluídos. O código contido neste repositório está testado, auditado e **pronto para migração via Git Remote (`upstream`) para a organização oficial `rmchaimalm`**.
+## 4. Declaração de Soberania Técnica (CISSP Domain 8)
+Eu, Vinícius de Oliveira Santos, declaro que auditei manualmente as ferramentas e dependências deste projeto. Confirmo que o código gerado via IA (GitHub Copilot) passou pela minha revisão humana (*Human-in-the-loop*), garantindo que não há vazamento de segredos ou falhas lógicas críticas antes da migração para o ecossistema da PCDF.
+
+---
+**Data de Entrega:** 21/03/2026
